@@ -1,5 +1,6 @@
 use rayon::prelude::*;
 use std::io::{self, BufRead};
+use std::{thread, time};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let input = io::stdin();
@@ -14,9 +15,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         url_list.push(line.trim().to_string());
     }
     println!("url,status");
+    let duration_millis = time::Duration::from_millis(100);
     url_list.par_iter()
         .for_each(|url| {
             let resp = reqwest::blocking::get(url).unwrap();
+            thread::sleep(duration_millis); // sleepを挟んでリクエストを緩くする
             println!("{},{:?}", url, resp.status());
         });
     Ok(())
