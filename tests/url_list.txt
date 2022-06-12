@@ -1,0 +1,5 @@
+https://github.com/ShinNakamura
+https://docs.rs/rayon/latest/rayon/
+https://doc.rust-lang.org/stable/std/thread/fn.sleep.html
+https://gist.github.com/ShinNakamura
+http://foo_unknown.co.jp

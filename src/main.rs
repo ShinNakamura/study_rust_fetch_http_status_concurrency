@@ -14,13 +14,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         url_list.push(line.trim().to_string());
     }
-    println!("url,status");
+    println!("url,status"); // CSV形式の出力のヘッダー
     let duration_millis = time::Duration::from_millis(100);
     url_list.par_iter()
         .for_each(|url| {
-            let resp = reqwest::blocking::get(url).unwrap();
+            let status = match reqwest::blocking::get(url) {
+                Ok(resp) => resp.status().to_string(),
+                // Okでなければ単に"Error"という文字列を返す。
+                _ => "Error".to_string(),
+            };
             thread::sleep(duration_millis); // sleepを挟んでリクエストを緩くする
-            println!("{},{:?}", url, resp.status());
+            println!("{},{}", url, status);
         });
     Ok(())
 }
