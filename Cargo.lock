@@ -130,7 +130,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "fetch-http-status"
+name = "fetch_http_status_concurrency"
 version = "0.1.0"
 dependencies = [
  "rayon",
