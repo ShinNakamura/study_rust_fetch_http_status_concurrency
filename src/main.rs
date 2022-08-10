@@ -15,7 +15,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         url_list.push(line.trim().to_string());
     }
     println!("url,status"); // CSV形式の出力のヘッダー
-    let duration_millis = time::Duration::from_millis(100);
+    let duration_millis = time::Duration::from_millis(1500); // 1.5 sec
     url_list.par_iter()
         .for_each(|url| {
             let status = match reqwest::blocking::get(url) {
